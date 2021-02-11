@@ -21,6 +21,14 @@ Route::get('/teste', function () {
     return view('layout');
 });
 
+Route::get('/clientes', function () {
+    return view('admin.customers.index');
+});
+
+Route::get('/clientes/cadastro', function () {
+    return view('admin.customers.create');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
