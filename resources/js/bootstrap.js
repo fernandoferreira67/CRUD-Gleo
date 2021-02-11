@@ -12,6 +12,19 @@ try {
 
     require('bootstrap');
     require('admin-lte');
+    require('admin-lte/plugins/inputmask/jquery.inputmask');
+    require('admin-lte/plugins/daterangepicker/moment.min');
+    require('admin-lte/plugins/daterangepicker/daterangepicker');
+    
+    
+
+    window.$(document).ready(function(){
+        $(":input").inputmask();
+    });
+
+    window.$('input[name="dates"]').daterangepicker();
+
+
 } catch (e) {}
 
 /**

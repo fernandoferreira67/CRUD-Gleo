@@ -30,10 +30,10 @@
                 <div class="card-body">
                  
                   <div class="row">
-                    <div class="col-7">
+                    <div class="col-8">
                       <div class="form-group">
                         <label for="inputName">Nome Completo</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="Nome Completo">
+                        <input type="text" class="form-control" name="inputName" placeholder="Nome Completo">
                       </div>
                     </div>
                   </div>
@@ -42,22 +42,47 @@
                     <div class="col-2">
                         <div class="form-group">
                         <label for="inputCpf">CPF</label>
-                        <input type="text" class="form-control" id="inputCpf" placeholder="Digite os Apenas Números">
+                        <input type="text" class="form-control" name="inputCpf" data-inputmask="'mask': '999.999.999-99'" data-mask="" inputmode="text">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                         <label for="inputRg">RG</label>
-                        <input type="text" class="form-control" id="inputRg" placeholder="Digite os Apenas Números">
+                        <input type="text" class="form-control" name="inputRg" placeholder="Apenas Números">
                         </div>
                     </div>
+                  
+
+                  <div class="col-2">
+                  <div class="form-group">
+                    <label>Telefone</label>
+                      <div class="input-group">
+                       <div class="input-group-prepend">
+                       <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                      </div>
+                      <input type="text" name="inputPhone" class="form-control" data-inputmask="'mask': '(99)9999-9999'" data-mask="" inputmode="text">
+                     </div>
                   </div>
+                  </div>
+                  
+                  <div class="col-2">
+                  <div class="form-group">
+                    <label>Celular</label>
+                      <div class="input-group">
+                       <div class="input-group-prepend">
+                       <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                      </div>
+                      <input type="text" name="inputCellphone" class="form-control" data-inputmask="'mask': '(99)99999-9999'" data-mask="" inputmode="text">
+                     </div>
+                  </div>
+                  </div>
+                </div><!--End 2 Plan-->
 
                   <div class="row">
-                    <div class="col-7">
+                    <div class="col-8">
                       <div class="form-group">
                         <label for="inputEndereco">Endereço de Correspondência</label>
-                        <input type="text" class="form-control" id="inputEndereco" placeholder="Comece com Rua, Av ou Alameda...">
+                        <input type="text" class="form-control" name="inputEndereco" placeholder="Rua, Av ou Alameda...">
                       </div>
                     </div>
                   </div>
@@ -66,47 +91,33 @@
                     <div class="col-2">
                         <div class="form-group">
                         <label for="inputBairro">Bairro</label>
-                        <input type="text" class="form-control" id="inputBairro" placeholder="">
+                        <input type="text" class="form-control" name="inputBairro" placeholder="">
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                         <label for="inputCep">CEP</label>
-                        <input type="text" class="form-control" id="inputCep" placeholder="Digite os Apenas Números">
+                        <input type="text" class="form-control" name="inputCep" data-inputmask="'mask': '99999-999'" data-mask="" inputmode="text">
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="form-group">
                         <label for="inputCidade">Cidade</label>
-                        <input type="text" class="form-control" id="inputCidade" placeholder="Entre com nome da Cidade">
+                        <input type="text" class="form-control" name="inputCidade" placeholder="Entre com nome da Cidade">
                         </div>
                     </div>
                   </div>
 
-                  <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                        <label for="inputPhone">Telefone</label>
-                        <input type="text" class="form-control" id="inputPhone" placeholder="Telefone Principal">
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                        <label for="inputCellphone">Celular</label>
-                        <input type="text" class="form-control" id="inputCellphone" placeholder="Celular ou Whatsapp">
-                        </div>
-                    </div>
-                  </div>
 
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                       <div class="form-group">
                         <label>Observação</label>
-                        <textarea class="form-control" rows="3" placeholder="Observações..."></textarea>
+                        <textarea class="form-control" name="inputNotes" rows="3" placeholder="Observações..."></textarea>
                       </div>
                     </div>
                   </div>
-
+        
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
@@ -114,9 +125,6 @@
                     </div>
                   </div>
 
-
-                 
-              
               </form>
         </div>
        
