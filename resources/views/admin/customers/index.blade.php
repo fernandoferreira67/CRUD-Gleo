@@ -23,13 +23,16 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Clientes</h3>       
+          <h3 class="card-title">Clientes</h3>
+
+          <div class ="card-tools ">
+           <a href="{{route('customers.create')}}" class="btn btn-success">Adicionar Novo Cliente</a>   
+          </div>   
+          
         </div>
 
         <div class="card-body">
-         
-        <div class="card">
-             
+        <div class="card">      
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <table class="table table-striped">
@@ -37,19 +40,25 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Nome do Cliente</th>
+                      <th>Telefone</th>
+                      <th>Celular</th>
                       <th style="width: 200px">Label</th>
                     </tr>
                   </thead>
 
                   <tbody>
+                  @foreach($customers as $customer)
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
+                      <td>{{$customer->id}}</td>
+                      <td>{{$customer->fullname}}</td>
+                      <td>{{$customer->phone}}</td>
+                      <td>{{$customer->phone}}</td>
                       <td>
                           <a href="#"><span class="btn btn-primary btn-sm">EDITAR</span></a>
-                          <a href="#"><span class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></span></a>
+                          <a href="#"><span class="btn btn-danger btn-sm">EXCLUIR</i></span></a>
                       </td>
                     </tr>
+                  @endforeach
                   </tbody>
                 </table>
               </div>
@@ -59,12 +68,8 @@
         </div>
 
         <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">«</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">»</a></li>
+                <ul class="pagination pagination m-0 float-right">
+                {{$customers->links()}}
                 </ul>
         </div>
        

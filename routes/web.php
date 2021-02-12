@@ -17,11 +17,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
-//Route::resource('admin/customers','CustomerController');
-
-Route::get('/admin/customers/add','CustomerController@create');
-Route::post('/admin/customers/store','CustomerController@store')->name('cadastro');
+Route::resource('admin/customers','CustomerController');
 
 Auth::routes();
 

@@ -22,7 +22,8 @@ class CustomerController extends Controller
     
      public function index()
     {
-        //
+        $customers = $this->customer->paginate(20);
+        return view('admin.customers.index', compact('customers'));
     }
 
     /**
@@ -44,7 +45,11 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        dd($data);
+
+        $customer = $this->customer->create($data);
+        
+        flash('Cliente Criado com Sucesso!')->success();
+        return redirect()->route('customers.index');
     }
 
     /**
