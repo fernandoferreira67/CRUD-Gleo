@@ -14,25 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/teste', function () {
-    return view('layout');
-});
 
-Route::get('/clientes', function () {
-    return view('admin.customers.index');
-});
+//Route::resource('admin/customers','CustomerController');
 
-Route::get('/clientes/cadastro', function () {
-    return view('admin.customers.create');
-});
+Route::get('/admin/customers/add','CustomerController@create');
+Route::post('/admin/customers/store','CustomerController@store')->name('cadastro');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

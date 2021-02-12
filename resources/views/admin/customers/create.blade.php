@@ -26,7 +26,9 @@
         </div>
 
         <div class="card-body">
-            <form>
+
+            <form action="{{route('cadastro')}}" method="post">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <div class="card-body">
                  
                   <div class="row">
