@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
 
 Route::resource('admin/customers','CustomerController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
+/*Login*/
+Route::get('/', 'LoginController@dashboard')->name('admin');
+Route::get('/login', 'LoginController@showLoginForm')->name('admin.login');
+Route::get('/login/logout', 'LoginController@logout')->name('admin.logout');
+Route::post('/login/do', 'LoginController@login')->name('admin.login.do');
