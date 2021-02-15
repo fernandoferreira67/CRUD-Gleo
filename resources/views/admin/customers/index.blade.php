@@ -6,7 +6,8 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Clientes-Index</h1>
+            <h1>Clientes</h1>
+                 
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,14 +36,14 @@
         <div class="card">      
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Nome do Cliente</th>
                       <th>Telefone</th>
                       <th>Celular</th>
-                      <th style="width: 200px">Label</th>
+                      <th style="width: 220px">Label</th>
                     </tr>
                   </thead>
 
@@ -54,8 +55,17 @@
                       <td>{{$customer->phone}}</td>
                       <td>{{$customer->phone}}</td>
                       <td>
-                          <a href="#"><span class="btn btn-primary btn-sm">EDITAR</span></a>
-                          <a href="#"><span class="btn btn-danger btn-sm">EXCLUIR</i></span></a>
+                   
+                          <div class="btn-group">
+                          <a href="{{route('customers.edit', ['customer' => $customer->id])}}"><span class="btn btn-primary btn-sm">EDITAR</span></a>
+                            
+                          <form action="{{route('customers.destroy', ['customer' => $customer->id])}}" method="post">
+                                        @csrf
+                                        @method("DELETE")
+                                        <button type="submit" class="btn btn-danger btn-sm">EXCLUIR</button>
+                          </form>
+
+
                       </td>
                     </tr>
                   @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
@@ -22,7 +23,7 @@ class CustomerController extends Controller
     
      public function index()
     {
-        $customers = $this->customer->paginate(20);
+        $customers = $this->customer->paginate(5);
         return view('admin.customers.index', compact('customers'));
     }
 
@@ -42,13 +43,13 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
         $data = $request->all();
 
         $customer = $this->customer->create($data);
         
-        flash('Cliente Criado com Sucesso!')->success();
+        flash('Cadastro Criado com Sucesso!')->success();
         return redirect()->route('customers.index');
     }
 
@@ -71,7 +72,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = $this->customer->findorFail($id);
+        return view('admin.customers.edit',compact('customer'));
     }
 
     /**
@@ -81,9 +83,16 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, $customer)
     {
-        //
+  
+        $data = $request->all();
+        $customer = $this->customer->find($customer);
+        $customer->update($data);
+
+        flash('Cadastro atualizado com sucesso!')->success();
+        return redirect()->route('customers.index');
+
     }
 
     /**
@@ -94,6 +103,10 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $customer = $this->customer->find($id);
+        $customer->delete();
+
+        flash('Cadastro Removido com Sucesso!')->success();
+        return redirect()->route('customers.index');
     }
 }
