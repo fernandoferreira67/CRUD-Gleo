@@ -9,4 +9,6 @@ class Customer extends Model
     protected $fillable = [
         'fullname', 'cpf', 'rg', 'phone','cellphone','address', 'district', 'cep', 'city', 'description', 'active'
     ];
+
+   
 }

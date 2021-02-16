@@ -21,10 +21,28 @@ class CustomerController extends Controller
         $this->customer = $customer;
     }
     
-     public function index()
+     public function index(Request $request)
     {
-        $customers = $this->customer->paginate(5);
-        return view('admin.customers.index', compact('customers'));
+        if($request->has('search')){
+            $search = $request->get('search');
+
+            $customers = $this->customer->where('fullname', 'like', "%{$search}%")
+            //->orderBy('fullname', 'DESC')->paginate(15);
+            ->orWhere('phone', 'like', "%{$search}%")
+            ->orWhere('cellphone', 'like', "%{$search}%")
+            //->orWhere('phone', 'like', "%{$search}%")
+            //->orWhere('address', 'like', "%{$search}%")
+            ->paginate(10);
+
+            $customers->appends(['search' => $search]);
+
+            //dd($customers->appends(['search' => $search]));
+            return view('admin.customers.index', compact('customers', 'search'));
+
+        } else {
+            $customers = $this->customer->where('active',1)->orderBy('id','DESC')->paginate(15);
+            return view('admin.customers.index', compact('customers'));
+        }
     }
 
     /**
@@ -108,5 +126,15 @@ class CustomerController extends Controller
 
         flash('Cadastro Removido com Sucesso!')->success();
         return redirect()->route('customers.index');
+    }
+
+    public function search(Request $request)
+    {
+        $query =  $request->query;
+        $customers = $this->customer->where('fullname','LIKE','%' .$query. '%');
+
+       dd($customers);
+       return view('admin.customers.index', ['customers' => $customers]);
+        
     }
 }

@@ -38,14 +38,23 @@
                         <label for="inputName">ID</label>
                         <input type="text" class="form-control @error('id') is-invalid @enderror" name="id" value="{{$customer->id}}" readonly>
                       </div>
-                    </div>    
-                    <div class="form-group">
+                    </div>
+                    
+                    <div class="col-2">    
+                      <div class="form-group">
                         <label class="">Situação do Cadastro</label>
                         <select class="form-control" name="active"> 
-                          <option  value="0" {{ $customer->active == 0 ? 'selected' : '' }} >Inativo</option>
-                          <option  value="1" {{ $customer->active == 1 ? 'selected' : '' }}>Ativo</option>
+                          <option  value="1" {{ $customer->active == 1 ? 'selected' : '' }} >Ativo</option>
+                          <option  value="0" {{ $customer->active == 0 ? 'selected' : '' }}>Inativo</option>
                         </select>
                       </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group">
+                      <label for="">Ultima Atualização</label>
+                      <input type="text" class="form-control" value="{{$customer->updated_at->format('d/m/Y H:i')}}" readonly>
+                      </div>
+                    </div>
                   </div>
                  
                   <div class="row">
@@ -147,11 +156,11 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                      <button type="submit" class="btn btn-lg btn-success">Alterar Cadastro</button>          
-                      <button type="submit" class="btn btn-lg btn-primary">Voltar</button>
-                    </div>
-
+                      <button type="submit" class="btn btn-lg btn-success">Alterar Cadastro</button>
+                      <a href="{{route('customers.index')}}" class="btn btn-lg btn-primary">Voltar</a>
+                    </div>          
               </form>
+                      
         </div>
        
       </div>
