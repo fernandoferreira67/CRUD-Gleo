@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::resource('admin/customers','CustomerController');
+Route::get('admin/os','OrderServiceController@index')->name('os.index');
+Route::get('admin/os/create','OrderServiceController@create')->name('os.create');
+Route::post('admin/os/store','OrderServiceController@store')->name('os.store');
+
 
 Auth::routes();
-
 /*Login*/
 Route::get('/', 'LoginController@dashboard')->name('admin');
 Route::get('/login', 'LoginController@showLoginForm')->name('admin.login');

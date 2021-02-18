@@ -53,9 +53,9 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('os.index') }}" class="nav-link @if(request()->is('admin/os')) active @endif">
               <i class="nav-icon fas fa-folder-open"></i>
-              <p>Pedidos
+              <p>Ordens de Serviço
               </p>
             </a>
           </li>

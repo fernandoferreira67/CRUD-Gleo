@@ -10,5 +10,10 @@ class Customer extends Model
         'fullname', 'cpf', 'rg', 'phone','cellphone','address', 'district', 'cep', 'city', 'description', 'active'
     ];
 
+    public function orderService()
+    {
+       return $this->hasMany(OrderService::class);
+    }
+
    
 }

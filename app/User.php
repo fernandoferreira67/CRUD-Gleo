@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function osCreated()
+    {
+        return $this->hasMany(OrderService::class, 'created_user_id', 'id');
+    }
+
+    public function osFinished()
+    {
+        return $this->hasMany(OrderService::class, 'finished_user_id', 'id');
+    }
 }

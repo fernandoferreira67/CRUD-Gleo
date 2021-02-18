@@ -58,7 +58,7 @@
                       <th>Nome do Cliente</th>
                       <th>Telefone</th>
                       <th>Celular</th>
-                      <th style="width: 220px">Label</th>
+                      <th style="width: 220px">Ações</th>
                     </tr>
                   </thead>
 
