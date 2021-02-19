@@ -16,6 +16,8 @@ Route::resource('admin/customers','CustomerController');
 Route::get('admin/os','OrderServiceController@index')->name('os.index');
 Route::get('admin/os/create','OrderServiceController@create')->name('os.create');
 Route::post('admin/os/store','OrderServiceController@store')->name('os.store');
+Route::get('admin/os/{orderService}/edit','OrderServiceController@edit')->name('os.edit');
+Route::put('admin/os/{orderService}','OrderServiceController@update')->name('os.update');
 
 
 Auth::routes();

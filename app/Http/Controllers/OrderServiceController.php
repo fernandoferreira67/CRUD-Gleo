@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderServiceRequest;
 use App\OrderService;
 use App\Customer;
 use App\User;
@@ -23,9 +24,10 @@ class OrderServiceController extends Controller
    
     public function index()
     {
-        //$orderServices = $this->orderService->all();
-        $orderServices = $this->orderService->with('customer')->get();
+        $orderServices = $this->orderService->paginate(10);
+        //$orderServices = $this->orderService->with('customer')->get();
 
+        //dd($orderServices);
         return view('admin.orderservices.index', compact('orderServices'));
       
     }
@@ -37,7 +39,8 @@ class OrderServiceController extends Controller
      */
     public function create()
     {
-        return view('admin.orderservices.create');
+        $customers = $this->customer->all();
+        return view('admin.orderservices.create', compact('customers'));
     }
 
     /**
@@ -46,9 +49,15 @@ class OrderServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderServiceRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $orderService = $this->orderService->create($data);
+
+        flash('Orden de serviço aberta com sucesso')->success();
+        return redirect()->route('os.index');
+
     }
 
     /**
@@ -70,7 +79,8 @@ class OrderServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $os = $this->orderService->findorFail($id);
+        return view('admin.orderservices.edit', compact('os'));
     }
 
     /**
@@ -80,9 +90,14 @@ class OrderServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(OrderServiceRequest $request, $orderService)
     {
-        //
+        $data = $request->all();
+        $orderService = $this->orderService->find($orderService);
+        $orderService->update($data);
+        
+        flash('Orden de Serviço atualizada com sucesso!')->success();
+        return redirect()->route('os.index');
     }
 
     /**
@@ -94,5 +109,10 @@ class OrderServiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function openOs()
+    {
+
     }
 }

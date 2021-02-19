@@ -28,7 +28,7 @@
                       <th style="width: 10px">OS</th>
                       <th>Cliente</th>
                       <th>Telefone</th>
-                      <th>Aberto</th>
+                      <th>OS Aberta</th>
                       <th style="width: 220px">Ações</th>
                     </tr>
                   </thead>
@@ -47,7 +47,8 @@
                       <td>
                    
                           <div class="btn-group">
-                          <a href="#"><span class="btn btn-primary btn-sm">EDITAR</span></a>
+                          <a href="{{ route('os.edit',['orderService' => $os->id]) }}"><span class="btn btn-primary btn-sm">EDITAR</span></a>
+                  
                             
                           <form action="#" method="post">
                                         @csrf
@@ -69,8 +70,9 @@
 
         <div class="card-footer clearfix">
                 <ul class="pagination pagination m-0 float-right">
-               
+                {{$orderServices->links()}}
                 </ul>
+                
         </div>
        
        
