@@ -7,6 +7,7 @@ use App\Http\Requests\OrderServiceRequest;
 use App\OrderService;
 use App\Customer;
 use App\User;
+use PDF;
 
 class OrderServiceController extends Controller
 {
@@ -94,6 +95,10 @@ class OrderServiceController extends Controller
     {
         $data = $request->all();
         $orderService = $this->orderService->find($orderService);
+
+        $data['price'] = formatPriceToDatabase($data['price']);
+
+        //dd($data['price']);
         $orderService->update($data);
         
         flash('Orden de Serviço atualizada com sucesso!')->success();
@@ -111,8 +116,12 @@ class OrderServiceController extends Controller
         //
     }
 
-    public function openOs()
+    public function generatePDF()
     {
+        $os = $this->orderService->all();
+        $pdf = PDF::loadView('reports.orders', compact('os'));
+        return $pdf->setPaper('a4')->stream('orden_de_servico.pdf');
+        //dd($os);
 
     }
 }

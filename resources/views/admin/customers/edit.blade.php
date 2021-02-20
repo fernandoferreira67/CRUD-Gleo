@@ -52,7 +52,7 @@
                     <div class="col-2">
                       <div class="form-group">
                       <label for="">Ultima Atualização</label>
-                      <input type="text" class="form-control" value="{{$customer->updated_at->format('d/m/Y H:i')}}" readonly>
+                      <input type="text" class="form-control" value="{{ $customer->updated_at ? $customer->updated_at->format('d/m/Y H:i') : $customer->created_at->format('d/m/Y H:is') }}" readonly>
                       </div>
                     </div>
                   </div>

@@ -13,8 +13,9 @@ try {
     require('bootstrap');
     require('admin-lte');
     require('admin-lte/plugins/inputmask/jquery.inputmask');
-    require('admin-lte/plugins/daterangepicker/moment.min');
-    require('admin-lte/plugins/daterangepicker/daterangepicker');
+    //require('admin-lte/plugins/daterangepicker/moment.min');
+    //require('admin-lte/plugins/daterangepicker/daterangepicker');
+    require('jquery-maskmoney/dist/jquery.maskMoney.min');
     
     
 
@@ -22,7 +23,10 @@ try {
         $(":input").inputmask();
     });
 
-    window.$('input[name="dates"]').daterangepicker();
+    
+
+    
+    //window.$('input[name="dates"]').daterangepicker();
 
 
 } catch (e) {}
