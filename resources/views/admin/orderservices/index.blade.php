@@ -29,7 +29,7 @@
                       <th>Cliente</th>
                       <th>Telefone</th>
                       <th>OS Aberta</th>
-                      <th style="width: 220px">Ações</th>
+                      <th style="width: 320px">Ações</th>
                     </tr>
                   </thead>
 
@@ -55,6 +55,8 @@
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-danger btn-sm">EXCLUIR</button>
                           </form>
+
+                          <a href="{{ route('os.generatePrint',['id' => $os->id]) }}"><span class="btn btn-success btn-sm">IMPRIMIR OS</span></a>
 
 
                       </td>

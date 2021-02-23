@@ -98,7 +98,7 @@ class OrderServiceController extends Controller
 
         $data['price'] = formatPriceToDatabase($data['price']);
 
-        //dd($data['price']);
+        //dd($data);
         $orderService->update($data);
         
         flash('Orden de Serviço atualizada com sucesso!')->success();
@@ -116,11 +116,19 @@ class OrderServiceController extends Controller
         //
     }
 
-    public function generatePDF()
+    public function generatePDF($id)
     {
-        $os = $this->orderService->all();
+        $os = $this->orderService->find($id);
         $pdf = PDF::loadView('reports.orders', compact('os'));
         return $pdf->setPaper('a4')->stream('orden_de_servico.pdf');
+        //dd($os);
+
+    }
+
+    public function generatePrint($id)
+    {
+        $os = $this->orderService->find($id);
+        return view('reports.orders', compact('os'));
         //dd($os);
 
     }

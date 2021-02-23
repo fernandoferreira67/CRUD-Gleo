@@ -2,5 +2,5 @@
 
 function formatPriceToDatabase($price)
 {
-    return str_replace(['R$ ','.',','], ['','','.'], $price);
+    return str_replace(['R$','.',','], ['','','.'], $price);
 }
