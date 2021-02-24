@@ -23,13 +23,27 @@ class OrderServiceController extends Controller
         $this->user = $user;
     }
    
-    public function index()
+    public function index(Request $request)
     {
-        $orderServices = $this->orderService->paginate(10);
-        //$orderServices = $this->orderService->with('customer')->get();
+        if($request->has('search')){
+            $search = $request->get('search');
 
-        //dd($orderServices);
-        return view('admin.orderservices.index', compact('orderServices'));
+            //$orderServices = $this->orderService->customer->where('fullname', 'like', "%{$search}%")
+            $orderServices = $this->orderService->Where('id', 'like', "%{$search}%")
+            //->orWhere('phone', 'like', "%{$search}%")
+            ->paginate(10);
+
+            $orderServices->appends(['search' => $search]);
+            return view('admin.orderservices.index', compact('orderServices', 'search'));
+
+       
+        }else{
+            $orderServices = $this->orderService->where('status','>=',2)->orderBy('id','DESC')->paginate(10);
+            //$orderServices = $this->orderService->paginate(10);
+            //$orderServices = $this->orderService->with('customer')->get();
+            //dd($orderServices);
+            return view('admin.orderservices.index', compact('orderServices'));
+        }
       
     }
 
@@ -97,8 +111,20 @@ class OrderServiceController extends Controller
         $orderService = $this->orderService->find($orderService);
 
         $data['price'] = formatPriceToDatabase($data['price']);
+        
 
-        //dd($data);
+        if($data['status'] == 1){
+
+            $id = $data['id'];
+            
+            $data['finished_user_id'] = auth()->user()->id;
+            $orderService->update($data);
+
+            flash('Orden de Serviço finalizada com sucesso!')->success();
+            return redirect()->route('os.generatePrint', compact('id'));
+            
+        };
+
         $orderService->update($data);
         
         flash('Orden de Serviço atualizada com sucesso!')->success();
@@ -113,7 +139,16 @@ class OrderServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $orderService = $this->orderService->find($id);
+      
+        $data['status'] = 0;
+        $data['finished_user_id'] = auth()->user()->id;
+       
+        $orderService->update($data);
+
+        flash('Orden de Serviço cancelada com sucesso!')->success();
+        return redirect()->route('os.index');
+         
     }
 
     public function generatePDF($id)
@@ -131,5 +166,11 @@ class OrderServiceController extends Controller
         return view('reports.orders', compact('os'));
         //dd($os);
 
+    }
+
+    public function generatePrintFinished($id)
+    {
+        $os = $this->orderService->find($id);
+        return view('reports.orderfinished', compact('os'));
     }
 }

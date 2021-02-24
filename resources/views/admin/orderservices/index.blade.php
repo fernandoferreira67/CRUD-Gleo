@@ -9,16 +9,38 @@
 
       <!-- Default box -->
       <div class="card">
-      <div class="card-header">
+        <div class="card-header">
           <h3 class="card-title">Ordens de Serviço</h3>
-
           <div class ="card-tools ">
            <a href="{{route('os.create')}}" class="btn btn-success">Abrir Ordem de Serviço</a>   
-          </div>   
+        </div>   
           
-        </div>
+      </div>
 
         <div class="card-body">
+        <div class="card  mt-1 p-3">
+
+             <form action="{{ route('os.index')}}" action="GET">
+                  <div class="input-group">
+                     <input class="form-control " type="search"  placeholder="Consulte por id, nome de cliente..." aria-label="Search" name="search">
+                     <div class="input-group-append">
+                     <button class="btn btn-success" type="submit"><i class="fas fa-search"></i></button>     
+             </form>
+                     <a href="{{route('os.index')}}" class="btn btn-primary">Limpar Filtro</a>
+                 </div>
+          </div>
+
+          <div class="mt-3">
+          <a href="#"class="btn btn-primary">Encerradas</a>
+          <a href="#" class="btn btn-success">Pendentes</a>
+          <a href="#"class="btn btn-dark">Em Andamento</a>
+          <a href="#"class="btn btn-danger">Aguardando Pagamento</a>
+
+          </div>
+
+        </div>
+          
+
         <div class="card">      
               <!-- /.card-header -->
               <div class="card-body p-0">
@@ -39,7 +61,11 @@
                       <td>{{$os->id}}</td>
                       <td>
                         <h5>{{$os->customer->fullname}}
-                          @if($os->status == 1)<span class="badge bg-danger">Finalizada</span>@elseif($os->status == 2)<span class="badge bg-success">Pendente</span>@endif
+                          @if($os->status == 1)<span class="badge bg-primary">Encerrada</span>
+                          @elseif($os->status == 2)<span class="badge bg-success">Pendente</span>
+                          @elseif($os->status == 3)<span class="badge bg-dark">Em Andamento</span>
+                          @elseif($os->status == 4)<span class="badge bg-danger">Aguardando Pagamento</span>
+                          @endif
                         </h5>
                       </td>
                       <td>{{$os->customer->phone}}</td>
@@ -50,13 +76,21 @@
                           <a href="{{ route('os.edit',['orderService' => $os->id]) }}"><span class="btn btn-primary btn-sm">EDITAR</span></a>
                   
                             
-                          <form action="#" method="post">
+                          <form action="{{ route('os.destroy',['id' => $os->id]) }}" method="post">
                                         @csrf
-                                        @method("DELETE")
-                                        <button type="submit" class="btn btn-danger btn-sm">EXCLUIR</button>
+                                        @method("PUT")
+                                        <button type="submit" class="btn btn-danger btn-sm">CANCELAR OS</button>
                           </form>
 
-                          <a href="{{ route('os.generatePrint',['id' => $os->id]) }}"><span class="btn btn-success btn-sm">IMPRIMIR OS</span></a>
+                          <div class="input-group-prepend">
+                           <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                           + OPÇÕES
+                          </button>
+                            <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
+                              <li class="dropdown-item"><a href="{{ route('os.generatePrint',['id' => $os->id]) }}">Imprimir OS</a></li>
+                               @if($os->status == 1 ||$os->status == 4  ) <li class="dropdown-item"><a href="{{ route('os.generatePrintFinished',['id' => $os->id]) }}">Imprimir Pedido </a></li> @endif
+                            </ul>
+                          </div>
 
 
                       </td>

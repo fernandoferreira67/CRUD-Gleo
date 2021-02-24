@@ -32,7 +32,6 @@
                       <div class="form-group">
                         <label class="">Status</label>
                         <select class="form-control" name="status"> 
-                          <option  value="0" {{ $os->status == 0 ? 'selected' : '' }} >Cancelada</option>
                           <option  value="1" {{ $os->status == 1 ? 'selected' : '' }} >Encerrada</option>
                           <option  value="2" {{ $os->status == 2 ? 'selected' : '' }} >Pendente</option>
                           <option  value="3" {{ $os->status == 3 ? 'selected' : '' }} >Em Andamento</option>
@@ -125,11 +124,13 @@
                         <label>Solução</label>
                         <textarea class="form-control" name="solution" rows="8" placeholder="Solução do Serviço..." style="resize: none">{{ $os->solution }}</textarea>
                       </div>
+
+                      
                     </div>
                     <div class="col-2">
                       <div class="form-group">
                       <label>Preço</label>
-                      <input type="text" class="form-control" id="price" value="{{'R$ '.$os->price}}" name="price">
+                      <input type="text" class="form-control" id="price" value="{{'R$'.$os->price}}" name="price">
                       </div>
                     </div>
                   </div>
@@ -153,7 +154,7 @@
 @section('scripts')
   <script>
     $('#price').maskMoney({
-      prefix: 'R$ ',
+      prefix: 'R$',
       allowNegative: false,
       thousands: '.',
       decimal: ','
