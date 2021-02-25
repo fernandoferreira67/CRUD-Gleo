@@ -31,10 +31,10 @@
           </div>
 
           <div class="mt-3">
-          <a href="#"class="btn btn-primary">Encerradas</a>
-          <a href="#" class="btn btn-success">Pendentes</a>
-          <a href="#"class="btn btn-dark">Em Andamento</a>
-          <a href="#"class="btn btn-danger">Aguardando Pagamento</a>
+          <a href="{{ route('os.search.custom',['status' => '1']) }}"class="btn btn-primary">Encerradas</a>
+          <a href="{{ route('os.search.custom',['status' => '2']) }}" class="btn btn-success">Pendentes</a>
+          <a href="{{ route('os.search.custom',['status' => '3']) }}"class="btn btn-dark">Em Andamento</a>
+          <a href="{{ route('os.search.custom',['status' => '4']) }}"class="btn btn-danger">Aguardando Pagamento</a>
 
           </div>
 

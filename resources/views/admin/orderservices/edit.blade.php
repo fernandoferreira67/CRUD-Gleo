@@ -130,7 +130,7 @@
                     <div class="col-2">
                       <div class="form-group">
                       <label>Preço</label>
-                      <input type="text" class="form-control" id="price" value="{{'R$'.$os->price}}" name="price">
+                      <input type="text" class="form-control" id="price" value="{{$os->price}}" name="price">
                       </div>
                     </div>
                   </div>
@@ -154,10 +154,10 @@
 @section('scripts')
   <script>
     $('#price').maskMoney({
-      prefix: 'R$',
       allowNegative: false,
       thousands: '.',
-      decimal: ','
-    });
+      decimal: ',',
+      allowEmpty: false
+   });
   </script>
 @endsection

@@ -28,13 +28,29 @@ class OrderServiceController extends Controller
         if($request->has('search')){
             $search = $request->get('search');
 
-            //$orderServices = $this->orderService->customer->where('fullname', 'like', "%{$search}%")
-            $orderServices = $this->orderService->Where('id', 'like', "%{$search}%")
-            //->orWhere('phone', 'like', "%{$search}%")
-            ->paginate(10);
+         
+            //$orderServices = $this->orderService->customer()->where('fullname', 'like', "%{$search}%")
 
-            $orderServices->appends(['search' => $search]);
-            return view('admin.orderservices.index', compact('orderServices', 'search'));
+            $orderServices = OrderService::select('order_services.*')
+                ->join('customers','customers.id','=','order_services.customer_id')
+                ->where(function($query) use($search){
+                    $query->where('order_services.id','=',"{$search}")
+                        ->orWhere('customers.fullname','like',"%{$search}%");
+                })
+                ->where('order_services.status','>=','1')
+                //->toSql();
+                ->paginate(10);
+
+                //dd($orderServices);
+
+          
+            //$orderServices = $this->orderService->Where('id', 'like', "%{$search}%")
+            //->orWhere('phone', 'like', "%{$search}%")
+            //->paginate(10);
+            //dd($orderServices);
+
+            //$orderServices->appends(['search' => $search]);
+            return view('admin.orderservices.index', compact('orderServices'));
 
        
         }else{
@@ -95,6 +111,8 @@ class OrderServiceController extends Controller
     public function edit($id)
     {
         $os = $this->orderService->findorFail($id);
+
+        //dd($os);
         return view('admin.orderservices.edit', compact('os'));
     }
 
@@ -112,7 +130,7 @@ class OrderServiceController extends Controller
 
         $data['price'] = formatPriceToDatabase($data['price']);
         
-
+        dd($data['price']);
         if($data['status'] == 1){
 
             $id = $data['id'];
@@ -172,5 +190,11 @@ class OrderServiceController extends Controller
     {
         $os = $this->orderService->find($id);
         return view('reports.orderfinished', compact('os'));
+    }
+
+    public function searchCustom($status)
+    {
+            $orderServices = $this->orderService->Where('status', '=', "{$status}")->paginate(10);
+            return view('admin.orderservices.index', compact('orderServices'));
     }
 }

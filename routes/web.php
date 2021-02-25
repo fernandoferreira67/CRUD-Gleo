@@ -21,6 +21,8 @@ Route::put('admin/os/{orderService}','OrderServiceController@update')->name('os.
 
 Route::put('admin/os/destroy/{id}','OrderServiceController@destroy')->name('os.destroy');
 
+Route::get('admin/os/search/{status}','OrderServiceController@searchCustom')->name('os.search.custom');
+
 Route::get('admin/os/pdf', 'OrderServiceController@generatePDF')->name('os.generatePDF');
 Route::get('admin/os/print/{id}', 'OrderServiceController@generatePrint')->name('os.generatePrint');
 Route::get('admin/os/endprint/{id}', 'OrderServiceController@generatePrintFinished')->name('os.generatePrintFinished');
