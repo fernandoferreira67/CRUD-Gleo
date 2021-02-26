@@ -130,7 +130,7 @@ class OrderServiceController extends Controller
 
         $data['price'] = formatPriceToDatabase($data['price']);
         
-        dd($data['price']);
+        //dd($data['price']);
         if($data['status'] == 1){
 
             $id = $data['id'];

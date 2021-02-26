@@ -142,7 +142,7 @@ p{
     width:100%;
     padding: 5px;
     border-top:1px solid #333;  
-    border-bottom:1px solid #333;  
+   
 }
 
 .solution{
@@ -169,3 +169,11 @@ p{
 }
 
 
+textarea {
+    width:100%;
+    line-height: 18px; 
+    border: 1px solid #333; 
+    border-radius: 0.5em;
+    font-size:14px;
+    resize: none; 
+}

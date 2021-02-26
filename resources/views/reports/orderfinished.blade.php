@@ -58,10 +58,10 @@
           <h3 style="color:#333; text-align:center">Solução</h3>
         </div>
 
-        <div class="solution">
-            {{$os->solution}}
-        </div>
-
+        <div class="form-group">
+              <textarea class="form-control" id="textarea" wrap="wrap" name="solution" rows="8" readonly>{{ $os->solution }}</textarea>
+        </div> 
+ 
         <div class="price-main">
           <h3 style="color:#333; text-align:right">Total da Ordem de Serviço:<span id="price">R${{number_format($os->price, 2, ',', '.')}}<span> </h3>
         </div>
@@ -69,11 +69,22 @@
        
    </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>   
+<script src="{{ asset('js/app.js') }}"></script>
+
 <script>
+
     $(document).ready(function(){
+      objTextArea = document.getElementById('textarea');
+        while (objTextArea.scrollHeight > objTextArea.offsetHeight)
+        {
+            objTextArea.rows += 1;
+
+        }
+      //$('#textarea').autoResize();
         //window.print();
+        
  });
+   
 </script>  
 </body>
 </html>

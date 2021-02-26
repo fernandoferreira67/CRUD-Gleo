@@ -16,6 +16,7 @@ try {
     //require('admin-lte/plugins/daterangepicker/moment.min');
     //require('admin-lte/plugins/daterangepicker/daterangepicker');
     require('jquery-maskmoney/dist/jquery.maskMoney.min');
+    require('admin-lte/plugins/summernote/summernote-bs4.min');
     
     
 

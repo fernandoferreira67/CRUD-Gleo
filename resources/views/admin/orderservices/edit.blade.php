@@ -28,7 +28,7 @@
                       </div>
                     </div>
                     
-                    <div class="col-2">    
+                    <div class="col-4">    
                       <div class="form-group">
                         <label class="">Status</label>
                         <select class="form-control" name="status"> 
@@ -47,7 +47,7 @@
                       </div>
                     </div>
 
-                    <div class="col-2">
+                    <div class="col-3">
                       <div class="form-group">
                       <label for="">OS Aberta</label>
                       <input type="text" class="form-control" value="{{$os->created_at->format('d/m/Y H:i')}}" readonly>
@@ -62,21 +62,21 @@
                     <input type="text" class="form-control" name="customer_id" value="{{$os->customer->id}}" readonly>
                     </div>
                   </div>
-                  <div class="col-4">
+                  <div class="col-5">
                    <div class="form-group">
                    <label for="">Cliente</label>
                    <input type="text" class="form-control" value="{{$os->customer->fullname}}" readonly>
                    </div>
                   </div>
 
-                  <div class="col-2">
+                  <div class="col-3">
                    <div class="form-group">
                    <label for="">Telefone</label>
                    <input type="text" class="form-control" value="{{$os->customer->phone}}" readonly>
                    </div>
                   </div>
 
-                  <div class="col-2">
+                  <div class="col-3">
                    <div class="form-group">
                    <label for="">Celular</label>
                    <input type="text" class="form-control" value="{{$os->customer->cellphone}}" readonly>
@@ -85,21 +85,21 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-5">
+                  <div class="col-6">
                     <div class="form-group">
                     <label for="">Endereço</label>
                     <input type="text" class="form-control" value="{{$os->customer->address}}" readonly>
                     </div>
                   </div>
 
-                  <div class="col-2">
+                  <div class="col-3">
                     <div class="form-group">
                     <label for="">Bairro</label>
                     <input type="text" class="form-control" value="{{$os->customer->district}}" readonly>
                     </div>
                   </div>
 
-                  <div class="col-2">
+                  <div class="col-3">
                     <div class="form-group">
                     <label for="">Cidade</label>
                     <input type="text" class="form-control" value="{{$os->customer->city}}" readonly>
@@ -109,20 +109,20 @@
 
                 
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-12">
                       <div class="form-group">
                         <label>Descrição</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="5" placeholder="Descrição do Serviço..." style="resize: none">{{ $os->description }}</textarea>
+                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="7" placeholder="Descrição do Serviço..." style="resize: none">{{ $os->description }}</textarea>
                         @error('description')<div class="invalid-feedback">{{$message}}</div> @enderror
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-8">
+                    <div class="col-10">
                       <div class="form-group">
                         <label>Solução</label>
-                        <textarea class="form-control" name="solution" rows="8" placeholder="Solução do Serviço..." style="resize: none">{{ $os->solution }}</textarea>
+                        <textarea class="form-control" wrap="wrap" name="solution" rows="10" placeholder="Solução do Serviço..." style="resize: none">{{ $os->solution }}</textarea>
                       </div>
 
                       
@@ -153,11 +153,10 @@
 
 @section('scripts')
   <script>
-    $('#price').maskMoney({
-      allowNegative: false,
-      thousands: '.',
-      decimal: ',',
-      allowEmpty: false
-   });
+
+  $('#price').maskMoney('destroy');
+  $('#price').maskMoney({thousands:'.', decimal:','});
+  $('#price').maskMoney('mask');
+
   </script>
 @endsection
