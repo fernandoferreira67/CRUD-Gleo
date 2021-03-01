@@ -18,6 +18,9 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>   
     </ul>
+    <ul class="navbar-nav ml-auto">
+    <a href="{{route('admin.logout')}}" class="btn btn-warning">Sair do Sistema</a>
+    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -46,25 +49,67 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('customers.index') }}" class="nav-link @if(request()->is('admin/customers')) active @endif ">
+            <a href="{{ route('customers.index') }}" class="nav-link @if(request()->is('admin/customers*')) active @endif ">
               <i class="nav-icon fas fa-user-plus"></i>
               <p>Clientes</p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('os.index') }}" class="nav-link @if(request()->is('admin/os')) active @endif">
+            <a href="{{ route('os.index') }}" class="nav-link @if(request()->is('admin/os*')) active @endif">
               <i class="nav-icon fas fa-folder-open"></i>
               <p>Ordens de Serviço
               </p>
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link @if(request()->is('admin/reports*')) active @endif">
               <i class="nav-icon fas fa-copy"></i>
-              <p> Relatório </p>
+              <p> Relatório
+                <i class="right fas fa-angle-left"></i>
+              </p>
             </a>
+
+            <ul class="nav nav-treeview">   
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-address-book nav-icon"></i>
+                  <p>Clientes</p>
+                </a>
+              </li>
+             
+
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link @if(request()->is('admin/reports/os* ')) active @endif">
+                  <i class="fas fa-clipboard nav-icon"></i>
+                  <p>
+                  Ordens de Serviço
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('admin.reports.ospeding')}}" class="nav-link @if(request()->is('admin/reports/os/ospeding')) active @endif">
+                      <i class="fas fa-edit nav-icon"></i>
+                      <p>OS Pendentes</p>
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a href="{{route('admin.reports.oswaiting')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/oswaiting')) active @endif">
+                      <i class="fas fa-money-check-alt nav-icon"></i>
+                      <p>OS Aguardando Pagamento</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
           </li>
         
         

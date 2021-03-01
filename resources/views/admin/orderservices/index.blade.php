@@ -31,8 +31,8 @@
           </div>
 
           <div class="mt-3">
-          <a href="{{ route('os.search.custom',['status' => '1']) }}"class="btn btn-primary">Encerradas</a>
-          <a href="{{ route('os.search.custom',['status' => '2']) }}" class="btn btn-success">Pendentes</a>
+          <a href="{{ route('os.search.custom',['status' => '1']) }}"class="btn btn-success">Encerradas</a>
+          <a href="{{ route('os.search.custom',['status' => '2']) }}" class="btn btn-primary">Pendentes</a>
           <a href="{{ route('os.search.custom',['status' => '3']) }}"class="btn btn-dark">Em Andamento</a>
           <a href="{{ route('os.search.custom',['status' => '4']) }}"class="btn btn-danger">Aguardando Pagamento</a>
 
@@ -61,8 +61,8 @@
                       <td>{{$os->id}}</td>
                       <td>
                         <h5>{{$os->customer->fullname}}
-                          @if($os->status == 1)<span class="badge bg-primary">Encerrada</span>
-                          @elseif($os->status == 2)<span class="badge bg-success">Pendente</span>
+                          @if($os->status == 1)<span class="badge bg-success">Encerrada</span>
+                          @elseif($os->status == 2)<span class="badge bg-primary">Pendente</span>
                           @elseif($os->status == 3)<span class="badge bg-dark">Em Andamento</span>
                           @elseif($os->status == 4)<span class="badge bg-danger">Aguardando Pagamento</span>
                           @endif
