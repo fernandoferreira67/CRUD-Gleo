@@ -16,24 +16,26 @@ class ReportController extends Controller
     {
         $this->customer = $customer;
         $this->orderService = $orderService;
+    }
 
+    public function reportAllCustomers()
+    {
+        $customers = $this->customer->all()->where('active',1);
+        $pdf = PDF::loadView('reports.reportAllCustomers', compact('customers'));
+        return $pdf->setPaper('a4')->stream('relatorio_todos_clientes.pdf');
     }
 
     public function reportOsPeding()
     {
-        $os = $this->orderService->all();
+        $os = $this->orderService->all() ->where('status','=',2);
         $pdf = PDF::loadView('reports.reportOsPeding', compact('os'));
-        //dd($os);
-        return $pdf->setPaper('a4')->stream('orden_de_servico.pdf');
-       
+        return $pdf->setPaper('a4')->stream('orden_de_servico_pendente.pdf');  
     }
 
     public function reportOsWaiting()
     {
-        $os = $this->orderService->where('status', '=', '1');
+        $os = $this->orderService->all()->where('status', '=', '4');
         $pdf = PDF::loadView('reports.reportOsWaiting', compact('os'));
-        //$pdf = PDF::set_base_path(realpath(dirname(__FILE__).'public/css/app.css'));
         return $pdf->setPaper('a4')->stream('orden_de_servico.pdf');
-        dd($os);
     }
 }

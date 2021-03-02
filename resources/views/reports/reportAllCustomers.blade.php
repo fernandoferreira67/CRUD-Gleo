@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Ordens Pendentes</title>   
+    <title>Relatório de Todos os Clientes</title>   
 <style type="text/css">
-
 
 @page {
 	margin: 0.8cm;
@@ -96,7 +95,7 @@ table.collapse td {
     <div id="header">
     <table>
         <tr>
-        <td><h1>Relatório de Ordens de Serviços - Pendente</h1></td>
+        <td><h1>Relatório - Todos os Clientes Ativo<h1></td>
         </tr>
     </table>
     </div>
@@ -105,24 +104,19 @@ table.collapse td {
     <table cellpadding="5px" cellspacing="0" width="100%" class="separate"> 
         <thead style="background-color:#aaa" >
             <tr>
-                <td>OS</td>
+                <td>Nº</td>
                 <td>Nome</td>
-                <td>Abertura da OS</td>
-                <td>Status</td>
+                <td>Telefone</td>
+                <td>Celular</td>
             </tr>
         </thead>
         <tbody>
-            @foreach($os as $key)
+            @foreach($customers as $key)
             <tr>
                 <td>{{$key->id}}</td>
-                <td>{{$key->customer->fullname}}</td>
-                <td>{{$key->created_at->format('d/m/Y h:m')}}</td>
-                @if($key->status == 0)<td>Cancelada</td>
-                @elseif($key->status == 1)<td>Encerrada</td>
-                    @elseif($key->status == 2)<td>Pendente</td>
-                    @elseif($key->status == 3)<td>Em Andamento</td>
-                        @elseif($key->status == 4)<td>Aguardando Pagamento</td>
-                @endif
+                <td>{{$key->fullname}}</td>
+                <td>{{$key->phone}}</td>
+                <td>{{$key->cellphone}}</td>
             </tr>
             @endforeach	
         </tbody>

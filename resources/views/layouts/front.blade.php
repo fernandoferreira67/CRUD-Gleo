@@ -76,7 +76,7 @@
 
             <ul class="nav nav-treeview">   
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.reports.customers.all')}}" class="nav-link">
                   <i class="fas fa-address-book nav-icon"></i>
                   <p>Clientes</p>
                 </a>

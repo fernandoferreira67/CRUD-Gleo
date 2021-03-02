@@ -38,3 +38,4 @@ Route::get('admin/os/endprint/{id}', 'OrderServiceController@generatePrintFinish
 /*Reports*/
 Route::get('admin/reports/os/ospeding','ReportController@reportOsPeding')->name('admin.reports.ospeding');
 Route::get('admin/reports/os/oswaiting','ReportController@reportOsWaiting')->name('admin.reports.oswaiting');
+Route::get('admin/reports/customers/all','ReportController@reportAllCustomers')->name('admin.reports.customers.all');
