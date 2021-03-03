@@ -8,7 +8,7 @@
 <style type="text/css">
 
 @page {
-	margin: 0.8cm;
+	margin: 1cm;
 }
 
 body {
@@ -33,6 +33,7 @@ table h1 {
 #header {
   top: 0;
   border-bottom: 0.1pt solid #aaa;
+
 }
 
 #footer {
@@ -71,7 +72,7 @@ th,td {
 }
 
 table.separate {
-  margin-top:18pt;
+  
 }
 
 table.separate td {
