@@ -76,7 +76,7 @@
 
             <ul class="nav nav-treeview">   
               <li class="nav-item">
-                <a href="{{route('admin.reports.customers.all')}}" class="nav-link">
+                <a href="{{route('admin.reports.customers.all')}}" target="_blank" class="nav-link">
                   <i class="fas fa-address-book nav-icon"></i>
                   <p>Clientes</p>
                 </a>
@@ -94,7 +94,7 @@
 
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{route('admin.reports.ospeding')}}" class="nav-link @if(request()->is('admin/reports/os/ospeding')) active @endif">
+                    <a href="{{route('admin.reports.ospeding')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/ospeding')) active @endif">
                       <i class="fas fa-edit nav-icon"></i>
                       <p>OS Pendentes</p>
                     </a>
@@ -111,6 +111,39 @@
 
             </ul>
           </li>
+
+
+
+          @if((auth()->user()->level == 'admin') or (auth()->user()->level == 'super'))
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link @if(request()->is('admin/settings*')) active @endif">
+              <i class="nav-icon fas fa-tools"></i>
+              <p> Configurações
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview">   
+              <li class="nav-item">
+                <a href="{{route('admin.settings.users.index')}}" class="nav-link @if(request()->is('admin/settings/users*')) active @endif">
+                  <i class="fas fa-user-circle nav-icon"></i>
+                  <p>Usuários</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/settings/backups/index" class="nav-link">
+                  <i class="fas fa-database nav-icon"></i>
+                  <p>Backups</p>
+                </a>
+              </li>
+           
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+          @endif
         
         
         </ul>

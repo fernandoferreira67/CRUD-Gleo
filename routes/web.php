@@ -36,6 +36,20 @@ Route::get('admin/os/print/{id}', 'OrderServiceController@generatePrint')->name(
 Route::get('admin/os/endprint/{id}', 'OrderServiceController@generatePrintFinished')->name('os.generatePrintFinished');
 
 /*Reports*/
+/*Customers*/
 Route::get('admin/reports/os/ospeding','ReportController@reportOsPeding')->name('admin.reports.ospeding');
 Route::get('admin/reports/os/oswaiting','ReportController@reportOsWaiting')->name('admin.reports.oswaiting');
 Route::get('admin/reports/customers/all','ReportController@reportAllCustomers')->name('admin.reports.customers.all');
+
+/*Settings*/
+/*Users*/
+Route::get('admin/settings/users/index', 'LoginController@index')->name('admin.settings.users.index');
+Route::get('admin/settings/users/create', 'LoginController@create')->name('admin.settings.users.create');
+Route::post('admin/settings/users/store', 'LoginController@store')->name('admin.settings.users.store');
+Route::get('admin/settings/users/{user}/edit', 'LoginController@edit')->name('admin.settings.users.edit');
+Route::put('admin/settings/users/{user}', 'LoginController@update')->name('admin.settings.users.update');
+
+/*Backup*/
+Route::get('admin/settings/backups/index', function(){
+    return view('admin.settings.backups.index');
+});

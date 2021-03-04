@@ -10,6 +10,7 @@
 
 
 <body class="login-page" style="min-height: 512.391px;">
+@include('flash::message')
 
 
 <div class="login-box">
@@ -34,7 +35,7 @@
       <form action="{{ route('admin.login.do') }}" method="post">
       <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nome do Usuário" name="username" value="admin@admin.com.br">
+          <input type="text" class="form-control" placeholder="Nome do Usuário" name="username" value="admin">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -63,6 +64,8 @@
     
   </div>
 </div>
+
+
 <!-- /.login-box -->
 
     <script src="{{ asset('js/app.js') }}"></script>
