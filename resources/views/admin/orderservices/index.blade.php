@@ -87,8 +87,10 @@
                            + OPÇÕES
                           </button>
                             <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
-                              <li class="dropdown-item"><a href="{{ route('os.generatePrint',['id' => $os->id]) }}">Imprimir OS</a></li>
-                               @if($os->status == 1 ||$os->status == 4  ) <li class="dropdown-item"><a href="{{ route('os.generatePrintFinished',['id' => $os->id]) }}">Imprimir Pedido </a></li> @endif
+                              <li class="dropdown-item">
+								<a href="{{ route('os.generatePrint',['id' => $os->id]) }}">Imprimir OS</a>
+							  </li>
+                               @if($os->status >= 1  ) <li class="dropdown-item"><a href="{{ route('os.generatePrintFinished',['id' => $os->id]) }}">Imprimir Pedido </a></li> @endif
                             </ul>
                           </div>
 

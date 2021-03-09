@@ -47,7 +47,7 @@
                   <div class="row">
                     <div class="col-10">
                       <div class="form-group">
-                        <label for="inputName">Nome Completo</label>
+                        <label for="inputName">Nome Cliente</label>
                         <input type="text" class="form-control @error('fullname') is-invalid @enderror" name="fullname" placeholder="Nome Completo" value="{{$customer->fullname}}">
                           @error('fullname')<div class="invalid-feedback">{{$message}}</div> @enderror
                       </div>
@@ -55,16 +55,16 @@
                   </div>
                  
                   <div class="row">
-                    <div class="col-2">
+                    <div class="col-3">
                         <div class="form-group">
-                        <label for="inputCpf">CPF</label>
-                        <input type="text" class="form-control  @error('cpf') is-invalid @enderror" name="cpf" data-inputmask="'mask': '999.999.999-99'" data-mask="" inputmode="text" value="{{$customer->cpf}}">
+                        <label for="inputCpf">CPF/CNPJ</label>
+                        <input type="text" class="form-control  @error('cpf') is-invalid @enderror" name="cpf" value="{{$customer->cpf}}">
                           @error('cpf')<div class="invalid-feedback">{{$message}}</div> @enderror  
                       </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
-                        <label for="inputRg">RG</label>
+                        <label for="inputRg">RG/IE</label>
                         <input type="text" class="form-control @error('rg') is-invalid @enderror" name="rg" placeholder="Apenas Números" value="{{$customer->rg}}">
                           @error('rg')<div class="invalid-feedback">{{$message}}</div> @enderror  
                         </div>

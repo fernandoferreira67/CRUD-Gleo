@@ -58,7 +58,7 @@
                         </h5>
                       </td>
                       <td>{{$customer->phone}}</td>
-                      <td>{{$customer->phone}}</td>
+                      <td>{{$customer->cellphone}}</td>
                       <td>
                    
                           <div class="btn-group">

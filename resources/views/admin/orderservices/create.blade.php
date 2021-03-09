@@ -44,7 +44,7 @@
                   <div class="row">
                     <div class="col-8">
                       <div class="form-group">
-                        <label>Descrição</label>
+                        <label>Anotação</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="3" placeholder="Descrição do serviço..." style="resize: none">{{old('description')}}</textarea>
                         @error('description')<div class="invalid-feedback">{{$message}}</div> @enderror
                       </div>

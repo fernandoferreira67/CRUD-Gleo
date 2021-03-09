@@ -19,7 +19,7 @@ class CreateOrderServicesTable extends Migration
             $table->unsignedBigInteger('created_user_id');
             $table->unsignedBigInteger('finished_user_id')->nullable();
             $table->integer('status')->default(2); //0-Cancelado|1-Finalizado|2-Pendente|3-Andamento|4-Aguardando Pagamento
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('solution')->nullable();
             $table->decimal('price', 10,2)->nullable();
             $table->timestamps();

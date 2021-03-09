@@ -14,14 +14,15 @@
 <div id="folha-a4" class="folha a4_vertical">
    <div id="conteudo">
         <div class="company">
-         <h1 class="center"> Ordem de Serviço</h1>
+         <h1 class="center"> POLIPEDRAS</h1>
           <table style="width:100%">
             <td>
-                <h4>POLIPEDRAS IBITINGA</h4>
-                <h4>CNPJ:00.000.000/0001-01</h4>
-                <h4>Acesso Manuiel Bento Costa, S/N</h4>
-                <h4>Bairro Novo</h4>
-                <h4>Cep:14944-044</h4>
+                <h4>POLIPEDRAS MARMORES E GRANITO</h4>
+                <h4>CNPJ:01.571.186/0001-00</h4>
+                <h4>Estrada Municipal José Bem Vindo Borsetto, 401</h4>
+                <h4>Bairro Marimbondo</h4>
+                <h4>Cep:14949-899</h4>
+				<h4>(16)3342-3030 | Whatsapp:(16) 9.9624-1335</h4>
                 <h4>Ibitinga/SP</h4>
             </td>
 
@@ -40,14 +41,14 @@
         </div>
 
         <div class="customer">
-         <p>Nome: {{$os->customer->fullname}} CPF: {{$os->customer->cpf}} RG: {{$os->customer->rg}}</p>
+         <p>Cliente: {{$os->customer->fullname}} CPF/CNPJ: {{$os->customer->cpf}} RG/IE: {{$os->customer->rg}}</p>
          <p>Endereço: {{$os->customer->address}} -  {{$os->customer->district}}</p>
          <p>Telefone: {{$os->customer->phone}} Celular: {{$os->customer->cellphone}} </p>
          <p>CEP: {{$os->customer->cep}} Cidade: {{$os->customer->city}}
         </div>
 
         <div class="description-main">
-          <h3 style="color:#333; text-align:center">Descrição</h3>
+          <h3 style="color:#333; text-align:center">Anotação</h3>
         </div>
 
         <div class="description bord-text">

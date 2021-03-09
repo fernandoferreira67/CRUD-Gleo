@@ -111,7 +111,7 @@
                 <div class="row">
                     <div class="col-12">
                       <div class="form-group">
-                        <label>Descrição</label>
+                        <label>Anotação</label>
                         <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="7" placeholder="Descrição do Serviço..." style="resize: none">{{ $os->description }}</textarea>
                         @error('description')<div class="invalid-feedback">{{$message}}</div> @enderror
                       </div>
@@ -121,7 +121,7 @@
                   <div class="row">
                     <div class="col-10">
                       <div class="form-group">
-                        <label>Solução</label>
+                        <label>Descrição</label>
                         <textarea class="form-control" wrap="wrap" name="solution" rows="10" placeholder="Solução do Serviço..." style="resize: none">{{ $os->solution }}</textarea>
                       </div>
 
