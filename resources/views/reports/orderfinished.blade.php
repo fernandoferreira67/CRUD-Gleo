@@ -10,6 +10,7 @@
 
 </head>
 <body>
+<div class="menu" id="menu"> <a href="{{route('os.index')}}">Voltar</a></div>
 
 <div id="folha-a4" class="folha a4_vertical">
    <div id="conteudo">
@@ -81,12 +82,12 @@
             objTextArea.rows += 1;
 
         }
+        $('#menu').hide();   
+        window.print();
+       
       //$('#textarea').autoResize();
         //window.print();
 	
-	  $(document).ready(function(){
-        window.print();
-	  });
         
  });
    

@@ -31,10 +31,11 @@
           </div>
 
           <div class="mt-3">
+          <a href="{{ route('os.search.custom',['status' => '0']) }}"class="btn btn-danger">Canceladas</a>
           <a href="{{ route('os.search.custom',['status' => '1']) }}"class="btn btn-success">Encerradas</a>
           <a href="{{ route('os.search.custom',['status' => '2']) }}" class="btn btn-primary">Pendentes</a>
           <a href="{{ route('os.search.custom',['status' => '3']) }}"class="btn btn-dark">Em Andamento</a>
-          <a href="{{ route('os.search.custom',['status' => '4']) }}"class="btn btn-danger">Aguardando Pagamento</a>
+          <a href="{{ route('os.search.custom',['status' => '4']) }}"class="btn btn-warning">Aguardando Pagamento</a>
 
           </div>
 
@@ -61,10 +62,11 @@
                       <td>{{$os->id}}</td>
                       <td>
                         <h5>{{$os->customer->fullname}}
-                          @if($os->status == 1)<span class="badge bg-success">Encerrada</span>
+                          @if($os->status == 0)<span class="badge bg-danger">Cancelada</span>
+                          @elseif($os->status == 1)<span class="badge bg-success">Encerrada</span>
                           @elseif($os->status == 2)<span class="badge bg-primary">Pendente</span>
                           @elseif($os->status == 3)<span class="badge bg-dark">Em Andamento</span>
-                          @elseif($os->status == 4)<span class="badge bg-danger">Aguardando Pagamento</span>
+                          @elseif($os->status == 4)<span class="badge bg-warning">Aguardando Pagamento</span>
                           @endif
                         </h5>
                       </td>
@@ -75,12 +77,13 @@
                           <div class="btn-group">
                           <a href="{{ route('os.edit',['orderService' => $os->id]) }}"><span class="btn btn-primary btn-sm">EDITAR</span></a>
                   
-                            
+                          @if((auth()->user()->level == 'admin') or (auth()->user()->level == 'super'))  
                           <form action="{{ route('os.destroy',['id' => $os->id]) }}" method="post">
                                         @csrf
                                         @method("PUT")
-                                        <button type="submit" class="btn btn-danger btn-sm">CANCELAR OS</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja Cancelar a O.S')">CANCELAR OS</button>
                           </form>
+                          @endif
 
                           <div class="input-group-prepend">
                            <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

@@ -139,7 +139,7 @@ class OrderServiceController extends Controller
             $orderService->update($data);
 
             flash('Orden de Serviço finalizada com sucesso!')->success();
-            return redirect()->route('os.generatePrint', compact('id'));
+            return redirect()->route('os.generatePrintFinished', compact('id'));
             
         };
 

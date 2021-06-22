@@ -64,11 +64,14 @@
                           <div class="btn-group">
                           <a href="{{route('customers.edit', ['customer' => $customer->id])}}"><span class="btn btn-primary btn-sm">EDITAR</span></a>
                             
-                          <form action="{{route('customers.destroy', ['customer' => $customer->id])}}" method="post">
+                         
+                          @if((auth()->user()->level == 'admin') or (auth()->user()->level == 'super'))
+                          <form action="{{route('customers.destroy', ['customer' => $customer->id])}}"  method="post">
                                         @csrf
                                         @method("DELETE")
-                                        <button type="submit" class="btn btn-danger btn-sm">EXCLUIR</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Deseja Excluir o Cadastro?')">EXCLUIR</button>
                           </form>
+                          @endif
 
 
                       </td>
