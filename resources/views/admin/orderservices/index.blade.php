@@ -20,7 +20,7 @@
         <div class="card-body">
         <div class="card  mt-1 p-3">
 
-             <form action="{{ route('os.index')}}" action="GET">
+             <form action="{{ route('os.search')}}" action="GET">
                   <div class="input-group">
                      <input class="form-control " type="search"  placeholder="Consulte por id, nome de cliente..." aria-label="Search" name="search">
                      <div class="input-group-append">
@@ -75,7 +75,7 @@
                       <td>
                    
                           <div class="btn-group">
-                          <a href="{{ route('os.edit',['orderService' => $os->id]) }}"><span class="btn btn-primary btn-sm">EDITAR</span></a>
+                          <a href="{{ route('os.edit',['orderService' => $os->id]) }}" class="mr-1"><span class="btn btn-primary btn-sm">EDITAR</span></a>
                   
                           @if((auth()->user()->level == 'admin') or (auth()->user()->level == 'super'))  
                           <form action="{{ route('os.destroy',['id' => $os->id]) }}" method="post">
@@ -85,15 +85,16 @@
                           </form>
                           @endif
 
-                          <div class="input-group-prepend">
-                           <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <div class="input-group-prepend ">
+                           <button type="button" class="btn btn-success btn-sm dropdown-toggle ml-1" data-toggle="dropdown" aria-expanded="false">
                            + OPÇÕES
                           </button>
                             <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);">
                               <li class="dropdown-item">
-								<a href="{{ route('os.generatePrint',['id' => $os->id]) }}">Imprimir OS</a>
-							  </li>
-                               @if($os->status >= 1  ) <li class="dropdown-item"><a href="{{ route('os.generatePrintFinished',['id' => $os->id]) }}">Imprimir Pedido </a></li> @endif
+								                <a href="{{ route('os.generatePrint',['id' => $os->id]) }}" target="_blank">Imprimir OS</a>
+							                </li>
+
+                              @if($os->status >= 1  ) <li class="dropdown-item"><a href="{{ route('os.generatePrintFinished',['id' => $os->id]) }}"target="_blank">Imprimir Pedido </a></li> @endif
                             </ul>
                           </div>
 

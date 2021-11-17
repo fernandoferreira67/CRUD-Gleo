@@ -51,10 +51,13 @@ return [
     | your application so that it is used when running Artisan tasks.
     |
     */
+    //'url' => env('APP_URL', 'http://app.sistema.local'), 
 
-    'url' => env('APP_URL', 'http://app.sistema.local'), 
+    //'asset_url' => env('ASSET_URL', 'http://app.sistema.local/'),
 
-    'asset_url' => env('ASSET_URL', 'http://app.sistema.local/'),
+    'url' => env('APP_URL', 'http://localhost'), 
+
+    'asset_url' => env('ASSET_URL', null),
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +165,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Spatie\Backup\BackupServiceProvider::class,
 
         /*
          * Package Service Providers...

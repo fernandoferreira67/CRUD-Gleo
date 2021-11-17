@@ -27,7 +27,7 @@ class OrderServiceRequest extends FormRequest
         //dd(request()->all());
         return [
             'customer_id' => 'required|not_in:0',
-            'description' => 'required|min:10' 
+            //'description' => 'required|min:10' 
         ];
 
     }
@@ -47,5 +47,4 @@ class OrderServiceRequest extends FormRequest
 
     }
 
-    
 }

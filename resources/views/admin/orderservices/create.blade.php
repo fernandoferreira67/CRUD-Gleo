@@ -1,11 +1,10 @@
 @extends('layouts.front')
 
 @section('content')
-    <section class="content-header">
-    </section>
+  <section class="content-header">
+  </section>
 
-    <section class="content">
-
+  <section class="content">
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
@@ -13,56 +12,63 @@
         </div>
 
         <div class="card-body">
+          <div class="card  mt-1 p-3">
+            <form action="{{ route('os.create')}}" action="GET">
+              <div class="input-group">
+                 <input class="form-control " type="search"  placeholder="Buscar Cliente" aria-label="Search" name="search">
+                 <div class="input-group-append">
+                 <button class="btn btn-secondary" type="submit">Pesquisar<i class="fas fa-search px-2"></i></button>
+                 <a href="{{route('os.create')}}" class="btn btn-success"><i class="fas fa-eraser px-2"></i>Limpar</a>
+              </div>   
+            </form>
+          </div>
 
-            <form action="{{route('os.store')}}" method="post">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <input type="hidden" name="created_user_id" value="{{auth()->user()->id}}">
-                <div class="card-body">
-                 
-                  <div class="row">
-                    <div class="col-8">    
-                      <div class="form-group">
-                        <label class="">Cliente:</label>
-                        <select class="form-control @error('customer_id') is-invalid @enderror" name="customer_id"> 
-                        <option  value="">Escolha um Cliente</option>                            
-                          @foreach($customers as $customer)
-                            @if($customer->id == old('customer_id'))
-                            <option  value="{{ $customer->id }}" selected>{{ $customer->fullname }}</option>
-                            @else
-                            <option  value="{{ $customer->id }}">{{ $customer->fullname }}</option>
-                            @endif
-                          @endforeach
-                        </select>
-                        @error('customer_id')<div class="invalid-feedback">{{$message}}</div> @enderror
-                       
-                      </div>
-                    
-                      
-                    </div>
-                  </div>
+          <div class="mt-4">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Nome do Cliente</th>
+                  <th>Telefone</th>
+                  <th>Celular</th>
+                  <th style="width: 220px">Ações</th>
+                </tr>
+              </thead>
 
-                  <div class="row">
-                    <div class="col-8">
-                      <div class="form-group">
-                        <label>Anotação</label>
-                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="3" placeholder="Descrição do serviço..." style="resize: none">{{old('description')}}</textarea>
-                        @error('description')<div class="invalid-feedback">{{$message}}</div> @enderror
-                      </div>
+              <tbody>
+              @foreach($customers as $customer)
+                <tr>
+                  <td>{{$customer->id}}</td>
+                  <td>
+                    <h5>{{$customer->fullname}}
+                      @if($customer->active == 0)<span class="badge bg-danger">Inativo</span>@else<span class="badge bg-success">Ativo</span>@endif
+                    </h5>
+                  </td>
+                  <td>{{$customer->phone}}</td>
+                  <td>{{$customer->cellphone}}</td>
+                  <td>
+                    <div class="btn-group">
+                        <form action="{{route('os.store', ['customer_id' => $customer->id])}}"  method="post">
+                          @csrf
+                          <input type="hidden" name="created_user_id" value="{{auth()->user()->id}}">
+                          <button type="submit" class="btn btn-success" onclick="return confirm('Deseja Realmente Abrir a Ordem de Serviço Para Este Cliente?')">SELECIONAR CLIENTE</button>
+                      </form>
                     </div>
-                  </div>
-        
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="form-group">
-                      <button type="submit" class="btn btn-lg btn-primary">Abrir OS</button>
-                    </div>
-                  </div>
-
-              </form>
+                  </td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div> 
         </div>
-       
-      </div>
-      
 
-    </section>
+        @if($customers->hasPages())
+          <div class="card-footer clearfix">
+            <ul class="pagination pagination m-0 float-right">
+            {{$customers->links()}}
+            </ul>
+          </div>
+        @endif
+    </div>
+  </section>
 @endsection

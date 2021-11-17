@@ -34,12 +34,18 @@ Route::get('admin/os/search/{status}','OrderServiceController@searchCustom')->na
 Route::get('admin/os/pdf', 'OrderServiceController@generatePDF')->name('os.generatePDF');
 Route::get('admin/os/print/{id}', 'OrderServiceController@generatePrint')->name('os.generatePrint');
 Route::get('admin/os/endprint/{id}', 'OrderServiceController@generatePrintFinished')->name('os.generatePrintFinished');
+Route::get('admin/os/searchOs', 'OrderServiceController@search')->name('os.search');
 
 /*Reports*/
 /*Customers*/
+Route::get('admin/reports/customers/all','ReportController@reportAllCustomers')->name('admin.reports.customers.all');
+/*Order Services*/
+Route::get('admin/reports/os/all','ReportController@reportAllOS')->name('admin.reports.os.all');
 Route::get('admin/reports/os/ospeding','ReportController@reportOsPeding')->name('admin.reports.ospeding');
 Route::get('admin/reports/os/oswaiting','ReportController@reportOsWaiting')->name('admin.reports.oswaiting');
-Route::get('admin/reports/customers/all','ReportController@reportAllCustomers')->name('admin.reports.customers.all');
+Route::get('admin/reports/os/cancel','ReportController@reportOSCancel')->name('admin.reports.os.cancel');
+Route::get('admin/reports/os/progress','ReportController@reportOSProgress')->name('admin.reports.os.progress');
+Route::get('admin/reports/os/finished','ReportController@reportOSfinished')->name('admin.reports.os.finished');
 
 /*Settings*/
 /*Users*/
@@ -50,6 +56,7 @@ Route::get('admin/settings/users/{user}/edit', 'LoginController@edit')->name('ad
 Route::put('admin/settings/users/{user}', 'LoginController@update')->name('admin.settings.users.update');
 
 /*Backup*/
-Route::get('admin/settings/backups/index', function(){
-    return view('admin.settings.backups.index');
-});
+Route::get('admin/settings/backup/index', 'BackupController@index')->name('admin.settings.backup.index');
+Route::get('admin/settings/backup/simple', 'BackupController@backupSimple')->name('admin.settings.backup.simple');
+Route::get('admin/settings/backup/complete', 'BackupController@backupComplete')->name('admin.settings.backup.complete');
+

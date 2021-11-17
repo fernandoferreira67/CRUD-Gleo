@@ -25,41 +25,8 @@ class OrderServiceController extends Controller
    
     public function index(Request $request)
     {
-        if($request->has('search')){
-            $search = $request->get('search');
-
-         
-            //$orderServices = $this->orderService->customer()->where('fullname', 'like', "%{$search}%")
-
-            $orderServices = OrderService::select('order_services.*')
-                ->join('customers','customers.id','=','order_services.customer_id')
-                ->where(function($query) use($search){
-                    $query->where('order_services.id','=',"{$search}")
-                        ->orWhere('customers.fullname','like',"%{$search}%");
-                })
-                ->where('order_services.status','>=','1')
-                //->toSql();
-                ->paginate(10);
-
-                //dd($orderServices);
-
-          
-            //$orderServices = $this->orderService->Where('id', 'like', "%{$search}%")
-            //->orWhere('phone', 'like', "%{$search}%")
-            //->paginate(10);
-            //dd($orderServices);
-
-            //$orderServices->appends(['search' => $search]);
-            return view('admin.orderservices.index', compact('orderServices'));
-
-       
-        }else{
-            $orderServices = $this->orderService->where('status','>=',2)->orderBy('id','DESC')->paginate(10);
-            //$orderServices = $this->orderService->paginate(10);
-            //$orderServices = $this->orderService->with('customer')->get();
-            //dd($orderServices);
-            return view('admin.orderservices.index', compact('orderServices'));
-        }
+      $orderServices = $this->orderService->where('status','>=',2)->orderBy('id','DESC')->paginate(10);
+      return view('admin.orderservices.index', compact('orderServices'));
       
     }
 
@@ -68,10 +35,28 @@ class OrderServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $customers = $this->customer->all();
-        return view('admin.orderservices.create', compact('customers'));
+      
+        if($request->filled('search')) {
+         
+          $search = $request->get('search');
+
+          $customers = $this->customer->where('fullname', 'like', "%{$search}%")
+          ->paginate(10);
+
+          $customers->appends(['search' => $search]);
+
+            if(count($customers) > 0) { 
+              return view('admin.orderservices.create', compact('customers','search'));
+            }
+            
+            flash('Pesquisa não encontrou nenhum resultado')->warning();
+            return view('admin.orderservices.create',  compact('customers','search'));
+        }
+
+          $customers = $this->customer->where('active',1)->orderBy('id','DESC')->paginate(15);
+          return view('admin.orderservices.create', compact('customers'));
     }
 
     /**
@@ -80,28 +65,20 @@ class OrderServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrderServiceRequest $request)
+    public function store(Request $request)
     {
+        
         $data = $request->all();
-
+        $data['status'] = 3; //Status Em Andamento
+        
         $orderService = $this->orderService->create($data);
 
-        flash('Orden de serviço aberta com sucesso')->success();
-        return redirect()->route('os.index');
+        $lastOS = $orderService->id; //Retorno do ID do Banco
 
+        return redirect()->route('os.edit',['orderService' => $lastOS]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -111,8 +88,6 @@ class OrderServiceController extends Controller
     public function edit($id)
     {
         $os = $this->orderService->findorFail($id);
-
-        //dd($os);
         return view('admin.orderservices.edit', compact('os'));
     }
 
@@ -139,7 +114,7 @@ class OrderServiceController extends Controller
             $orderService->update($data);
 
             flash('Orden de Serviço finalizada com sucesso!')->success();
-            return redirect()->route('os.generatePrintFinished', compact('id'));
+            return view('admin.orderservices.endOs', compact('id'));
             
         };
 
@@ -194,7 +169,44 @@ class OrderServiceController extends Controller
 
     public function searchCustom($status)
     {
-            $orderServices = $this->orderService->Where('status', '=', "{$status}")->paginate(10);
-            return view('admin.orderservices.index', compact('orderServices'));
+      $orderServices = $this->orderService->Where('status', '=', "{$status}")->orderBy('id','DESC')->paginate(10);
+      return view('admin.orderservices.index', compact('orderServices'));
+    }
+
+    
+    public function search(Request $request)
+    {       
+      
+        if($request->filled('search')) {
+
+          $search = $request->search;
+
+          $orderServices = OrderService::select('order_services.*')
+            ->join('customers','customers.id','=','order_services.customer_id')
+            ->where(function($query) use($search){
+              $query->where('order_services.id','=',"{$search}")
+                  ->orWhere('customers.fullname','like',"%{$search}%");
+              })
+            ->where('order_services.status','>=','1')
+            ->paginate(10);
+
+            $orderServices->appends(['search' => $search]);  
+
+              
+            if(count($orderServices) > 0) { 
+              return view('admin.orderservices.index', compact('orderServices','search'));
+            }
+
+            flash('Pesquisa não encontrou nenhum resultado')->warning();
+            return redirect()->route('os.index');
+
+        }
+        
+        flash('Pesquisa não encontrou nenhum resultado')->warning();
+        return redirect()->route('os.index');
+
+
+      
+          
     }
 }

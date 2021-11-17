@@ -94,18 +94,47 @@
 
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
+                    <a href="{{route('admin.reports.os.all')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/all')) active @endif">
+                      <i class="fas fa-file-invoice nav-icon"></i>
+                      <p>Todas OS</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('admin.reports.os.cancel')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/cancel')) active @endif">
+                      <i class="fas fa-file-excel nav-icon"></i>
+                      <p>OS Cancelada</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
                     <a href="{{route('admin.reports.ospeding')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/ospeding')) active @endif">
-                      <i class="fas fa-edit nav-icon"></i>
-                      <p>OS Pendentes</p>
+                      <i class="fas fa-file-powerpoint nav-icon"></i>
+                      <p>OS Pendente</p>
                     </a>
                   </li>
                   
                   <li class="nav-item">
                     <a href="{{route('admin.reports.oswaiting')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/oswaiting')) active @endif">
-                      <i class="fas fa-money-check-alt nav-icon"></i>
+                      <i class="fas fa-file-invoice-dollar nav-icon"></i>
                       <p>OS Aguardando Pagamento</p>
                     </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('admin.reports.os.progress')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/progress')) active @endif">
+                      <i class="fas fa-file-alt nav-icon"></i>
+                      <p>OS Em Andamento</p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="{{route('admin.reports.os.finished')}}" target="_blank" class="nav-link @if(request()->is('admin/reports/os/finished')) active @endif">
+                      <i class="fas fa-file nav-icon"></i>
+                      <p>OS Encerrada</p>
+                    </a>
+                  </li>
+
                 </ul>
               </li>
 
@@ -132,7 +161,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="/admin/settings/backups/index" class="nav-link">
+                <a href="/admin/settings/backup/index" class="nav-link">
                   <i class="fas fa-database nav-icon"></i>
                   <p>Backups</p>
                 </a>
