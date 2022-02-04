@@ -100,6 +100,14 @@ class OrderServiceController extends Controller
      */
     public function update(OrderServiceRequest $request, $orderService)
     {
+      
+      //Filter Role 'User' Não Encerrar OS
+      
+      if(auth()->user()->level == 'user' &&  $request['status'] == 1){
+        flash('Você Não Tem Permissão Para Encerrar Order de Serviço!')->error();
+        return redirect()->back();
+      }  
+           
         $data = $request->all();
         $orderService = $this->orderService->find($orderService);
 
