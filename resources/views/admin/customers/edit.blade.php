@@ -42,6 +42,12 @@
                       <input type="text" class="form-control" value="{{ $customer->updated_at ? $customer->updated_at->format('d/m/Y H:i') : $customer->created_at->format('d/m/Y H:is') }}" readonly>
                       </div>
                     </div>
+                    <div class="col-3">
+                      <label for=""></label>
+                      <div class="form-group">
+                        <a href="{{route('customer.os.history', ['id' => $customer->id])}}" class="btn btn-lg btn-info">Historico do Cliente</a>
+                      </div>
+                    </div>
                   </div>
                  
                   <div class="row">

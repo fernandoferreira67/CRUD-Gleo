@@ -21,7 +21,7 @@
 
                 <div class="card-body">
                 <div class="row">
-                    <div class="col-1">
+                    <div class="col-2">
                       <div class="form-group">
                         <label for="osId">OS Nº</label>
                         <input type="text" class="form-control" name="id" value="{{$os->id}}" readonly>
@@ -47,7 +47,7 @@
                       </div>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-2">
                       <div class="form-group">
                       <label for="">OS Aberta</label>
                       <input type="text" class="form-control" value="{{$os->created_at->format('d/m/Y H:i')}}" readonly>

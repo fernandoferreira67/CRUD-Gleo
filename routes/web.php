@@ -36,6 +36,9 @@ Route::get('admin/os/print/{id}', 'OrderServiceController@generatePrint')->name(
 Route::get('admin/os/endprint/{id}', 'OrderServiceController@generatePrintFinished')->name('os.generatePrintFinished');
 Route::get('admin/os/searchOs', 'OrderServiceController@search')->name('os.search');
 
+/*Customer - Order Services*/
+Route::get('admin/customers/os/user/{id}','OrderServiceController@history')->name('customer.os.history');
+
 /*Reports*/
 /*Customers*/
 Route::get('admin/reports/customers/all','ReportController@reportAllCustomers')->name('admin.reports.customers.all');
@@ -46,6 +49,10 @@ Route::get('admin/reports/os/oswaiting','ReportController@reportOsWaiting')->nam
 Route::get('admin/reports/os/cancel','ReportController@reportOSCancel')->name('admin.reports.os.cancel');
 Route::get('admin/reports/os/progress','ReportController@reportOSProgress')->name('admin.reports.os.progress');
 Route::get('admin/reports/os/finished','ReportController@reportOSfinished')->name('admin.reports.os.finished');
+
+/*Report Custom*/
+Route::get('admin/reports/index','ReportController@index')->name('admin.reports.index');
+Route::post('admin/reports/custom','ReportController@reportCustom')->name('admin.reports.custom');
 
 /*Settings*/
 /*Users*/

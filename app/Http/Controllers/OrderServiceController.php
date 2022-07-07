@@ -211,10 +211,27 @@ class OrderServiceController extends Controller
         }
         
         flash('Pesquisa não encontrou nenhum resultado')->warning();
-        return redirect()->route('os.index');
+        return redirect()->route('os.index');    
+    }
 
+    public function history($id)
+    {
+      //dd('chegou'. $id);
+      //dd(auth()->user()->level);
+      if($id){
 
+        if(auth()->user()->level != 'user'){
+
+          $OSCustomer = $this->orderService->with('customer')->where('customer_id', '=', $id)->get();
+
+          //dd($OSCustomer);
+          return view('admin.customers.history', compact('OSCustomer', 'id'));
+
+        }
+  
+        flash('Você Não Tem Permissão, Fale Com Suporte!')->error();
+        return redirect()->back();
+      }
       
-          
     }
 }

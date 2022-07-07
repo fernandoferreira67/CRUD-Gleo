@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Administração</title>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style-custom.css')}}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -75,6 +76,13 @@
             </a>
 
             <ul class="nav nav-treeview">   
+              <li class="nav-item">
+                <a href="{{route('admin.reports.index')}}" class="nav-link">
+                  <i class="fas fa-calendar nav-icon"></i>
+                  <p>Por Data</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{route('admin.reports.customers.all')}}" target="_blank" class="nav-link">
                   <i class="fas fa-address-book nav-icon"></i>

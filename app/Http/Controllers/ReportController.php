@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use App\OrderService;
 use PDF;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -16,6 +17,11 @@ class ReportController extends Controller
     {
         $this->customer = $customer;
         $this->orderService = $orderService;
+    }
+
+    public function index()
+    {
+        return view('reports.index');
     }
 
     public function reportAllCustomers()
@@ -50,7 +56,7 @@ class ReportController extends Controller
         $data = $this->orderService
                 ->all()
                 ->where('status','=',3);
-        $pdf = PDF::loadView('reports.report', compact('data','typeRPT'));
+        $pdf = PDF::loadView('reports.reportProgress', compact('data','typeRPT'));
         return $pdf->setPaper('a4')->stream('relatorio_os_andamento.pdf');
     }
 
@@ -76,5 +82,20 @@ class ReportController extends Controller
         $os = $this->orderService->all()->where('status', '=', '4');
         $pdf = PDF::loadView('reports.reportOsWaiting', compact('os'));
         return $pdf->setPaper('a4')->stream('relatorio_os_aguardando_pagamento.pdf');
+    }
+
+    public function reportCustom(Request $request)
+    {
+        $start= date($request->date_init, time()); 
+        $end= date($request->date_end, time());
+        $status = $request->status;
+
+        $report = $this->orderService::whereBetween('updated_at', array($start, $end))
+               ->where('status', '=' , $status) 
+               ->get();
+ 
+        $pdf = PDF::loadView('reports.reportOsCustom', compact('report','status'));
+        return $pdf->setPaper('a4')->stream('custom_report');          
+
     }
 }
